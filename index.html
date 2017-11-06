@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+        color: #fff;
+        font-family: 'Nunito Semibold';
+        text-align: center;
+    }
+
+    #content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 150px/* minmax(60px, auto) */
+        ;
+        grid-gap: 10px;
+        display: grid;
+        max-width: 480px;
+        margin: 0 auto;
+        position: relative;
+        align-items: stretch;
+    }
+
+    #content div {
+        background: #333;
+        padding: 30px;
+
+    }
+
+    .title {
+        grid-column: 1/5;
+        height: 50px;
+    }
+
+    .one {
+        grid-column: 1/3;
+        grid-row: 2/3;
+    }
+
+    .two {
+        grid-column: 3/5;
+        grid-row: 2/3;
+    }
+
+    .three {
+        grid-column: 1/3;
+        grid-row: 3/4;
+    }
+
+    .four {
+        grid-column: 3/5;
+        grid-row: 3/4;
+    }
+
+    .footer {
+
+        color: black;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        background-color: #efefef;
+        text-align: center;
+        opacity: 0.7;
+    }
+</style>
+
+<body>
+
+
+    <div id="content">
+        <div class="title">Simon</div>
+        <div class="one">1</div>
+        <div class="two">2</div>
+        <div class="three">3</div>
+        <div class="four">4</div>
+    </div>
+    <footer class="footer">created by Dai Phung</footer>
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js "></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js "></script>
+    <script src="js/simon.js"></script>
+</body>
+
+</html>
