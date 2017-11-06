@@ -36,7 +36,7 @@
 
     .title {
         grid-column: 1/5;
-        height: 50px;
+        height: 5px;
     }
 
     .one {
@@ -66,7 +66,6 @@
         grid-row: 3/4;
         background: darkblue;
         border-radius: 15px 50px;
-
     }
 
     .footer {
@@ -81,29 +80,32 @@
         opacity: 0.7;
     }
 
+
+    /* slider CSS */
     .slider {
         margin-top: 40px;
     }
 
     #slideInput {
-        width: 60%;
+        width: 200px;
         color: white;
     }
+    
 </style>
 
 <body>
 
 
     <div id="content">
-        <div class="title">Simon</div>
+        <div class="title">Simon</div>      
         <div class="btn one">1</div>
         <div class="btn two">2</div>
         <div class="btn three">3</div>
         <div class="btn four">4</div>
     </div>
     <div class="slider">
-        <input type="range" min="1" max="4" value="1" step="1" id="slideInput"><br>
-        <label id="rangeText" />
+            <input type="range" min="1" max="4" value="1" step="1" id="slideInput"><br>
+            <label id="rangeText" />
     </div>
     <footer class="footer">created by Dai Phung</footer>
 
