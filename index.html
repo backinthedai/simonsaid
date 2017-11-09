@@ -88,7 +88,7 @@
         opacity: 0.7;
     }
 
-    /* slider CSS */
+ /** slider CSS */
 
     .slider {
         margin-top: 40px;
@@ -103,8 +103,11 @@
         width: 200px;
         color: white;
     }
+    
+/** slider CSS */
 
-    #mid {
+
+    .mid {
         display: none;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -116,60 +119,59 @@
         background: #1f1e1e;
     }
 
-    .mid-one {
+    #mid-one {
         grid-column: 1/2;
         grid-row: 1/2;
-        background: #006400;
+        background: rgb(0, 100, 0);
         border-radius: 15px 50px;
     }
 
-    .mid-two {
+    #mid-two {
         grid-column: 2/3;
         grid-row: 1/2;
-        background: #8b0000;
+        background: rgb(139, 0, 0);
         border-radius: 15px 50px;
-        color: #87cefa;
     }
 
-    .mid-three {
+    #mid-three {
         grid-column: 3/4;
         grid-row: 1/2;
-        background: #b8860b;
+        background: rgb(184, 134, 11);
         border-radius: 15px 50px;
     }
 
-    .mid-four {
+    #mid-four {
         grid-column: 4/5;
         grid-row: 1/2;
-        background: #00008b;
+        background: rgb(0, 0, 139);
         border-radius: 15px 50px;
     }
 
-    .mid-five {
+    #mid-five {
         grid-column: 1/2;
         grid-row: 2/3;
-        background: darkblue;
+        background: rgb(0, 0, 139);
         border-radius: 15px 50px;
     }
 
-    .mid-six {
+    #mid-six {
         grid-column: 2/3;
         grid-row: 2/3;
-        background: darkgoldenrod;
+        background: rgb(184, 134, 11);
         border-radius: 15px 50px;
     }
 
-    .mid-seven {
+    #mid-seven {
         grid-column: 3/4;
         grid-row: 2/3;
-        background: darkred;
+        background: rgb(139, 0, 0);
         border-radius: 15px 50px;
     }
 
-    .mid-eight {
+    #mid-eight {
         grid-column: 4/5;
         grid-row: 2/3;
-        background: darkgreen;
+        background: rgb(0, 100, 0);
         border-radius: 15px 50px;
     }
 
@@ -311,15 +313,15 @@
         <div class="btn" id="four">4</div>
     </div>
 
-    <div id="mid">
-        <div class="btn mid-one">1</div>
-        <div class="btn mid-two">2</div>
-        <div class="btn mid-three">3</div>
-        <div class="btn mid-four">4</div>
-        <div class="btn mid-five">5</div>
-        <div class="btn mid-six">6</div>
-        <div class="btn mid-seven">7</div>
-        <div class="btn mid-eight">8</div>
+    <div class="mid" id="mid-mousehover">
+        <div class="btn" id="mid-one">1</div>
+        <div class="btn" id="mid-two">2</div>
+        <div class="btn" id="mid-three">3</div>
+        <div class="btn" id="mid-four">4</div>
+        <div class="btn" id="mid-five">5</div>
+        <div class="btn" id="mid-six">6</div>
+        <div class="btn" id="mid-seven">7</div>
+        <div class="btn" id="mid-eight">8</div>
     </div>
 
     <div id="harder">
