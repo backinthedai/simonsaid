@@ -1,7 +1,10 @@
 
 /* MouseOver Functionality */
 let btnMouseHover = document.getElementById("btn-mousehover");
+let midMouseHover = document.getElementById("mid-mousehover");
+
 btnMouseHover.addEventListener("mouseover", mouseOver, false);
+midMouseHover.addEventListener("mouseover", mouseOver, false);
 
 function mouseOver(e) {
     let id = e.target.id;
@@ -35,6 +38,7 @@ function mouseOver(e) {
     }
 
     btnMouseHover.addEventListener("mouseout", mouseOut, false);
+    midMouseHover.addEventListener("mouseout", mouseOut, false);
 
     function mouseOut() {
 
@@ -51,7 +55,6 @@ function mouseOver(e) {
             document.getElementById(id).style.backgroundColor = darkcolors.darkblue;
         }
     }
-
 }
 
 var rangeValues =
@@ -64,7 +67,7 @@ var rangeValues =
 
 let rangeText = document.getElementById("rangeText");
 rangeText.innerHTML = rangeValues[1]; /* Set default slider text Value */
-$("#mid").hide();
+$(".mid").hide();
 $("#harder").hide();
 
 /* Slider on Input */
@@ -72,7 +75,7 @@ slideInput.oninput = () => {
     rangeText.innerHTML = rangeValues[slideInput.value];
 
     if (slideInput.value === "1") {
-        $("#mid").hide('slow');
+        $(".mid").hide('slow');
         $("#harder").hide('slow');
         $(".content").show('slow');
         easyMode();
@@ -81,11 +84,11 @@ slideInput.oninput = () => {
     if (slideInput.value === "2") {
         $(".content").hide('slow');
         $("#harder").hide('slow');
-        $("#mid").show('slow');
+        $(".mid").show('slow');
     }
     if (slideInput.value === "3") {
         $(".content").hide('slow');
-        $("#mid").hide('slow');
+        $(".mid").hide('slow');
         $("#harder").show('slow');
     }
 }
