@@ -97,72 +97,105 @@ startBtn.addEventListener('click', function () {
 });
 
 const startGame = () => {
-    let delay = setTimeout(()=>{
-        let aiPlayed = ai();
-    }, 500); 
 
-    // if(aiPlayed){
-    //     human();
-    // }
+    let delay = setTimeout(() => {
+        let aiPlayed = ai();
+    }, 500);
+
 }
+
 
 let counter = 1;
+let totalTurns = 20;
+let totalTonesPerTurn = [];
+let timeout; // id for setTimeout
+
+for (var i = 0; i < totalTurns; i++) {
+    totalTonesPerTurn.push(Math.floor(Math.random() * 4) + 1);   //get random number from 1 to 4 b/c four audios
+}
+
+console.log(totalTonesPerTurn);
 
 const ai = () => {
+    playTones(totalTonesPerTurn[0]);
+    return true;
+}
 
-    playGreenNote(counter);
+const playTones = (num) => {
 
-    let timeout = setTimeout(()=>{
-        playRedNote(counter);
-    }, 1000);
+    if (num === 1) {
+        playGreenNote();
+    }
 
-    timeout = setTimeout(()=>{
-        playYellowNote(counter);
-    }, 2000);
+    if (num === 2) {
+        playGreenNote();
 
-    timeout = setTimeout(()=>{
-        playBlueNote(counter);
-    }, 3000);
+        timeout = setTimeout(() => {
+            playRedNote();
+        }, 1000);
+    }
 
+    if (num === 3) {
+        playGreenNote();
 
+        timeout = setTimeout(() => {
+            playRedNote();
+        }, 1000);
+
+        timeout = setTimeout(() => {
+            playYellowNote();
+        }, 2000);
+    }
+
+    if (num === 4) {
+        playGreenNote();
+
+        timeout = setTimeout(() => {
+            playRedNote();
+        }, 1000);
+
+        timeout = setTimeout(() => {
+            playYellowNote();
+        }, 2000);
+
+        timeout = setTimeout(() => {
+            playBlueNote();
+        }, 3000);
+    }
 }
 
 
-
-const playGreenNote=(count)=>{
+const playGreenNote = () => {
     $("#one").css("background-color", lightcolors.lightgreen);
     $('#audio1')[0].play();
     let timer = setTimeout(() => {
         $("#one").css("background-color", darkcolors.darkgreen);
     }, 1000);
-    return count += 1;
 }
 
-const playRedNote=(count)=>{
+const playRedNote = () => {
     $("#two").css("background-color", lightcolors.lightred);
     $('#audio2')[0].play();
     let timer = setTimeout(() => {
         $("#two").css("background-color", darkcolors.darkred);
     }, 1000);
-    return count += 1;
 }
 
-const playYellowNote=(count)=>{
+const playYellowNote = () => {
     $("#three").css("background-color", lightcolors.lightyellow);
     $('#audio3')[0].play();
     let timer = setTimeout(() => {
         $("#three").css("background-color", darkcolors.darkyellow);
     }, 1000);
-    return count += 1;
+
 }
 
-const playBlueNote=(count)=>{
+const playBlueNote = (count) => {
     $("#four").css("background-color", lightcolors.lightblue);
     $('#audio4')[0].play();
     let timer = setTimeout(() => {
         $("#four").css("background-color", darkcolors.darkblue);
     }, 1000);
-    return count += 1;
 }
 
 
