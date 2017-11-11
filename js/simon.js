@@ -1,6 +1,6 @@
 
 /* MouseOver Functionality */
-let btnMouseHover = document.getElementById("btn-mousehover");
+/* let btnMouseHover = document.getElementById("btn-mousehover");
 let midMouseHover = document.getElementById("mid-mousehover");
 let hardMouseHover = document.getElementById("hard-mousehover");
 
@@ -59,6 +59,22 @@ function mouseOver(e) {
         }
     }
 }
+ */
+
+
+const darkcolors = {
+    darkgreen: "rgb(0, 100, 0)",
+    darkred: "rgb(139, 0, 0)",
+    darkyellow: "rgb(184, 134, 11)",
+    darkblue: "rgb(0, 0, 139)"
+};
+
+const lightcolors = {
+    lightgreen: "rgb(144, 238, 144)",
+    lightred: "rgb(240, 128, 128)",
+    lightyellow: "rgb(255, 255, 224)",
+    lightblue: "rgb(173, 216, 230)"
+}
 
 var rangeValues =
     {
@@ -68,34 +84,113 @@ var rangeValues =
         // "4": "RESISTANCE IS FUTILE!!!"
     };
 
+/* Set title */
 let rangeText = document.getElementById("rangeText");
 rangeText.innerHTML = rangeValues[1]; /* Set default slider text Value */
+
+
+const startBtn = document.getElementById("start-btn");
+let playedArray = [];
+
+startBtn.addEventListener('click', function () {
+    startGame();
+});
+
+const startGame = () => {
+    let delay = setTimeout(()=>{
+        let aiPlayed = ai();
+    }, 500); 
+
+    // if(aiPlayed){
+    //     human();
+    // }
+}
+
+let counter = 1;
+
+const ai = () => {
+
+    playGreenNote(counter);
+
+    let timeout = setTimeout(()=>{
+        playRedNote(counter);
+    }, 1000);
+
+    timeout = setTimeout(()=>{
+        playYellowNote(counter);
+    }, 2000);
+
+    timeout = setTimeout(()=>{
+        playBlueNote(counter);
+    }, 3000);
+
+
+}
+
+
+
+const playGreenNote=(count)=>{
+    $("#one").css("background-color", lightcolors.lightgreen);
+    $('#audio1')[0].play();
+    let timer = setTimeout(() => {
+        $("#one").css("background-color", darkcolors.darkgreen);
+    }, 1000);
+    return count += 1;
+}
+
+const playRedNote=(count)=>{
+    $("#two").css("background-color", lightcolors.lightred);
+    $('#audio2')[0].play();
+    let timer = setTimeout(() => {
+        $("#two").css("background-color", darkcolors.darkred);
+    }, 1000);
+    return count += 1;
+}
+
+const playYellowNote=(count)=>{
+    $("#three").css("background-color", lightcolors.lightyellow);
+    $('#audio3')[0].play();
+    let timer = setTimeout(() => {
+        $("#three").css("background-color", darkcolors.darkyellow);
+    }, 1000);
+    return count += 1;
+}
+
+const playBlueNote=(count)=>{
+    $("#four").css("background-color", lightcolors.lightblue);
+    $('#audio4')[0].play();
+    let timer = setTimeout(() => {
+        $("#four").css("background-color", darkcolors.darkblue);
+    }, 1000);
+    return count += 1;
+}
+
+
 $(".mid").hide();
 $(".hard-lvl").hide();
 
-/* Slider on Input */
-slideInput.oninput = () => {
-    rangeText.innerHTML = rangeValues[slideInput.value];
+// /* Slider on Input */
+// slideInput.oninput = () => {
+//     rangeText.innerHTML = rangeValues[slideInput.value];
 
-    if (slideInput.value === "1") {
-        $(".mid").hide('slow');
-        $(".hard-lvl").hide('slow');
-        $(".content").show('slow');
-        easyMode();
-    }
+//     if (slideInput.value === "1") {
+//         $(".mid").hide('slow');
+//         $(".hard-lvl").hide('slow');
+//         $(".content").show('slow');
+//         easymode();
+//     }
 
-    if (slideInput.value === "2") {
-        $(".content").hide('slow');
-        $(".hard-lvl").hide('slow');
-        $(".mid").show('slow');
-    }
-    if (slideInput.value === "3") {
-        $(".content").hide('slow');
-        $(".mid").hide('slow');
-        $(".hard-lvl").show('slow');
-    }
-}
+//     if (slideInput.value === "2") {
+//         $(".content").hide('slow');
+//         $(".hard-lvl").hide('slow');
+//         $(".mid").show('slow');
+//     }
+//     if (slideInput.value === "3") {
+//         $(".content").hide('slow');
+//         $(".mid").hide('slow');
+//         $(".hard-lvl").show('slow');
+//     }
+// }
 
-const easyMode = () => {
 
-}
+
