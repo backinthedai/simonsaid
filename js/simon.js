@@ -104,66 +104,86 @@ const startGame = () => {
 
 }
 
-
-let counter = 1;
+let counter = 0;
 let totalTurns = 20;
 let totalTonesPerTurn = [];
 let timeout; // id for setTimeout
+let tonesObj = {};
 
 for (var i = 0; i < totalTurns; i++) {
     totalTonesPerTurn.push(Math.floor(Math.random() * 4) + 1);   //get random number from 1 to 4 b/c four audios
 }
-
 console.log(totalTonesPerTurn);
 
 const ai = () => {
-    playTones(totalTonesPerTurn[0]);
+    playTones(totalTonesPerTurn[counter]);  
+    counter++;
     return true;
 }
 
-const playTones = (num) => {
+const playTones = (idxValue) => {
+    
+    tones = getRandomTones(idxValue);
+    console.log(tones);
 
-    if (num === 1) {
-        playGreenNote();
+    if(idxValue === 1){
+      playTone(tones[0]);
     }
 
-    if (num === 2) {
-        playGreenNote();
-
+    if(idxValue === 2){
+        playTone(tones[0]);
         timeout = setTimeout(() => {
-            playRedNote();
+            playTone(tones[1]);
         }, 1000);
-    }
+    }   
 
-    if (num === 3) {
-        playGreenNote();
-
+    if(idxValue === 3){
+        playTone(tones[0]);
         timeout = setTimeout(() => {
-            playRedNote();
+            playTone(tones[1]);
         }, 1000);
-
         timeout = setTimeout(() => {
-            playYellowNote();
+            playTone(tones[2]);
         }, 2000);
-    }
+    }  
 
-    if (num === 4) {
-        playGreenNote();
-
+    if(idxValue === 4){
+        playTone(tones[0]);
         timeout = setTimeout(() => {
-            playRedNote();
+            playTone(tones[1]);
         }, 1000);
-
         timeout = setTimeout(() => {
-            playYellowNote();
+            playTone(tones[2]);
         }, 2000);
-
         timeout = setTimeout(() => {
-            playBlueNote();
+            playTone(tones[3]);
         }, 3000);
+    }    
+}
+
+const playTone =(num)=>{
+    if (num === 1){
+        playGreenNote();
+    }
+    if (num === 2){
+        playRedNote();
+    }
+    if (num === 3){
+        playYellowNote();
+    }
+    if (num === 4){
+        playBlueNote();
     }
 }
 
+const getRandomTones=(num)=>{
+    let arr = [];
+    for(var i = 0; i < num; i++){
+      let rnd = (Math.floor(Math.random() * 4) + 1);
+      arr.push(rnd);
+    }
+    return arr;
+}
 
 const playGreenNote = () => {
     $("#one").css("background-color", lightcolors.lightgreen);
