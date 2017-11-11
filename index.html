@@ -54,7 +54,7 @@
         background: rgb(0, 100, 0);
         border-radius: 15px 50px;
     }
-  
+
     #two {
         grid-column: 3/5;
         grid-row: 1/2;
@@ -74,18 +74,6 @@
         grid-row: 2/3;
         background: rgb(0, 0, 139);
         border-radius: 15px 50px;
-    }
-
-    .footer {
-        color: black;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        padding: 1rem;
-        background-color: #efefef;
-        text-align: center;
-        opacity: 0.7;
     }
 
  /** slider CSS */
@@ -111,7 +99,7 @@
         display: none;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: minmax(150px, auto);
+        grid-auto-rows: minmax(130px, auto);
         grid-gap: 10px;
         display: grid;
         max-width: 460px;
@@ -298,14 +286,31 @@
         background: rgb(184, 134, 11);
         border-radius: 100px;
     }
+
+    .start-button{
+        text-align: left;
+    }
+
+    .footer {
+        color: black;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        background-color: #efefef;
+        text-align: center;
+        opacity: 0.7;
+    }
 </style>
 
 <body>
     <header>
         Simon Said:
         <br>
-        <label id="rangeText" />
+            <label id="rangeText" />
     </header>
+    
     <div class="content" id="btn-mousehover">
         <div class="btn" id="one">1</div>
         <div class="btn" id="two">2</div>
@@ -343,15 +348,30 @@
         <div class="btn" id="h-sixteen">8</div>
     </div>
 
-    <div>
-        <button class="start-button">Start</button>
-    </div>
+   
 
-    <div class="slider">
+    <!-- <div class="slider">
         <input type="range" min="1" max="3" value="1" step="1" id="slideInput">
-        <br>
-
+    </div> -->
+    <div>
+        <button class="start-button" id ="start-btn">Start</button>
     </div>
+
+
+    <audio id="audio1">
+        <source src="media/simonSound1.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio2">
+        <source src="media/simonSound2.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio3">
+        <source src="media/simonSound3.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio4">
+        <source src="media/simonSound4.mp3" type="audio/mpeg">
+    </audio>
+
+
     <!-- <footer class="footer">created by Dai Phung</footer> -->
 
 
