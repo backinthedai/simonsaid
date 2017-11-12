@@ -29,6 +29,7 @@ const countText = document.getElementById("countText");
 const failText = document.getElementById("failText");
 
 const startBtn = document.getElementById("start-btn");
+const btnParent = document.getElementById("btn-parent");
 
 let counter = 0;
 let failCounter = 0;
@@ -38,7 +39,6 @@ let timeout, delay; // id for setTimeout
 let tobeMatch = []; //store ai random set 
 let toMatch = []; //store human clicks
 let humanIdx = 0; //idx for human clicks
-
 
 startBtn.addEventListener('click', function () {
     console.log("startbutton:" + startBtn.innerHTML);
@@ -77,9 +77,10 @@ const startGame = () => {
     delay = setTimeout(() => {
         //Human conditions
         console.log("tobeMatch Length:" + tobeMatch.length);
+
         if (tobeMatch.length > 0) {
-            let btnParent = document.getElementById("btn-parent");
-            btnParent.addEventListener("click", human, false);
+            
+            btnParent.addEventListener("click", human,false);
         }
     }, 1000);
 }
@@ -88,7 +89,6 @@ const startGame = () => {
 const ai = () => {
     let tonesArr = [];
     countText.innerHTML = `Success:  ${counter} / ${totalTurns}`;
-
     tonesArr = playTones(totalTonesPerTurn[counter]);
     return tonesArr;
 }
@@ -115,7 +115,7 @@ const human = (e) => {
             counter--; //<-- If wrong minus counter
         }
 
-        failText.innerHTML = `Fail:  ${failCounter += 1} / ${totalTurns}`;
+        failText.innerHTML = `Fail:  ${failCounter += 1}`;
 
         $('#audioWrong')[0].play();
         timeout = setTimeout(() => {
@@ -137,21 +137,27 @@ const human = (e) => {
         }, 2500);
     }
 
-    if (counter === totalTurns) {        
-        resetTurnValues();
-        counter = 0;
-        failCounter = 0;  
-
-        clearTimeout(timeout);
-        clearTimeout(delay);
+    //at the end of 20 turns
+    if (counter === totalTurns) {  
+        resetGame();       
 
         timeout = setTimeout(() => {
             rangeText.innerHTML = rangeValues[4];            
-        }, 2000);
+        }, 2000);       
     }
 }
 
+const resetGame=()=>{
+    resetTurnValues();
+    counter = 0;
+    failCounter = 0;  
+    btnParent.removeEventListener("click", human);
 
+    clearTimeout(timeout);
+    clearTimeout(delay);
+
+    
+}
 
 const resetTurnValues = () => {
     tobeMatch.length = 0;
