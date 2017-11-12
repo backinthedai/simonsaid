@@ -75,30 +75,30 @@
         border-radius: 15px 50px;
     }
 
- /** slider CSS */
+    /** slider CSS */
 
-    .slider {
+    /* .slider {
         margin-top: 40px;
         position: absolute;
         right: 0;
         bottom: 0;
         left: 0;
         padding: 1rem;
-    }
+    } */
 
     #slideInput {
-        width: 200px;
+        margin-top: 20px;
+        width: 100px;
         color: white;
     }
 
-/** slider CSS */
+    /** slider CSS */
 
-
-    .btn{
+    .btn {
         text-align: center;
     }
-    
-    .start-button{
+
+    .start-button {
         font-family: 'Bungee';
         font-size: 30px;
         border-radius: 100px;
@@ -107,13 +107,13 @@
         outline: none;
     }
 
-    .start-button:hover{
+    .start-button:hover {
         color: white;
         background: #1f1e1e;
-       
+
     }
 
-    .info{
+    .info {
         padding-top: 30px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -124,7 +124,7 @@
         margin: 0 auto;
     }
 
-    .stats{
+    .stats {
         text-align: left;
         padding-left: 20px;
 
@@ -153,9 +153,9 @@
     <header>
         Simon Said:
         <br>
-            <label id="rangeText" />
+        <label id="rangeText" />
     </header>
-    
+
     <div class="content" id="btn-parent">
         <div class="btn" id="one">1</div>
         <div class="btn" id="two">2</div>
@@ -163,15 +163,20 @@
         <div class="btn" id="four">4</div>
     </div>
 
-    <!-- <div class="slider">
-        <input type="range" min="1" max="3" value="1" step="1" id="slideInput">
-    </div> -->
     <div class="info">
         <div class="stats">
-            <label id="countText"></label><br>
+            <label id="countText"></label>
+            <br>
+            <br>
             <label id="failText"></label>
         </div>
-        <div><button type="button" class="btn start-button" id ="start-btn">Start</button></div>
+        <div>
+            <button type="button" class="btn start-button" id="start-btn">Start</button>
+        </div>
+        <div class="slider">
+            <input type="range" min="1" max="3" value="1" step="1" id="slideInput">
+        </div>
+
     </div>
 
 
