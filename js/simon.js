@@ -1,67 +1,4 @@
 
-/* MouseOver Functionality */
-/* let btnMouseHover = document.getElementById("btn-mousehover");
-let midMouseHover = document.getElementById("mid-mousehover");
-let hardMouseHover = document.getElementById("hard-mousehover");
-
-btnMouseHover.addEventListener("mouseover", mouseOver, false);
-midMouseHover.addEventListener("mouseover", mouseOver, false);
-hardMouseHover.addEventListener("mouseover", mouseOver, false);
-
-function mouseOver(e) {
-    let id = e.target.id;
-    let idObj = document.getElementById(id);
-
-    const darkcolors = {
-        darkgreen: "rgb(0, 100, 0)",
-        darkred: "rgb(139, 0, 0)",
-        darkyellow: "rgb(184, 134, 11)",
-        darkblue: "rgb(0, 0, 139)"
-    };
-
-    const lightcolors = {
-        lightgreen: "rgb(144, 238, 144)",
-        lightred: "rgb(240, 128, 128)",
-        lightyellow: "rgb(255, 255, 224)",
-        lightblue: "rgb(173, 216, 230)"
-    }
-
-    if (window.getComputedStyle(idObj, null).getPropertyValue("background-color") === darkcolors.darkgreen) {
-        idObj.style.backgroundColor = lightcolors.lightgreen;
-    }
-    if (window.getComputedStyle(idObj, null).getPropertyValue("background-color") === darkcolors.darkred) {
-        document.getElementById(id).style.backgroundColor = lightcolors.lightred;
-    }
-    if (window.getComputedStyle(idObj, null).getPropertyValue("background-color") === darkcolors.darkyellow) {
-        document.getElementById(id).style.backgroundColor = lightcolors.lightyellow;
-    }
-    if (window.getComputedStyle(idObj, null).getPropertyValue("background-color") === darkcolors.darkblue) {
-        document.getElementById(id).style.backgroundColor = lightcolors.lightblue;
-    }
-
-    btnMouseHover.addEventListener("mouseout", mouseOut, false);
-    midMouseHover.addEventListener("mouseout", mouseOut, false);
-    hardMouseHover.addEventListener("mouseout", mouseOut, false);
-
-    function mouseOut() {
-
-        if (window.getComputedStyle(idObj, null).getPropertyValue("background-color") === lightcolors.lightgreen) {
-            idObj.style.backgroundColor = darkcolors.darkgreen;
-        }
-        if (window.getComputedStyle(idObj, null).getPropertyValue("background-color") === lightcolors.lightred) {
-            document.getElementById(id).style.backgroundColor = darkcolors.darkred;
-        }
-        if (window.getComputedStyle(idObj, null).getPropertyValue("background-color") === lightcolors.lightyellow) {
-            document.getElementById(id).style.backgroundColor = darkcolors.darkyellow;
-        }
-        if (window.getComputedStyle(idObj, null).getPropertyValue("background-color") === lightcolors.lightblue) {
-            document.getElementById(id).style.backgroundColor = darkcolors.darkblue;
-        }
-    }
-}
- */
-
-
 const darkcolors = {
     darkgreen: "rgb(0, 100, 0)",
     darkred: "rgb(139, 0, 0)",
@@ -128,8 +65,10 @@ console.log(totalTonesPerTurn);
 
 //AI
 const ai = () => {
+    let tonesArr = [];
     countText.innerHTML = counter;
-    let tonesArr = playTones(totalTonesPerTurn[counter]);
+
+    tonesArr = playTones(totalTonesPerTurn[counter]);         
     counter++;
     return tonesArr;
 }
@@ -160,16 +99,14 @@ const human = (e) => {
             startGame();
         }, 1500);        
     }
-
-
 }
 
 //Get the value from totalTonesPerTurn array and use the value to get another randomize array to pick the colors
 const playTones = (idxValue) => {
     tones = getRandomTones(idxValue);
-    console.log(tones);
+    console.log("random set tones:" + tones);
 
-    if (idxValue === 1) {
+    if (idxValue === 1) {      
         playTone(tones[0]);
     }
 
@@ -202,6 +139,7 @@ const playTones = (idxValue) => {
             playTone(tones[3]);
         }, 3000);
     }
+
     return tones;
 }
 
@@ -221,7 +159,6 @@ const playTone = (num) => {
     }
 }
 
-
 const getRandomTones = (num) => {
     let arr = [];
     for (var i = 0; i < num; i++) {
@@ -236,7 +173,7 @@ const playGreenNote = () => {
     $('#audio1')[0].play();
     let timer = setTimeout(() => {
         $("#one").css("background-color", darkcolors.darkgreen);
-    }, 1000);
+    }, 300);
 }
 
 const playRedNote = () => {
@@ -244,7 +181,7 @@ const playRedNote = () => {
     $('#audio2')[0].play();
     let timer = setTimeout(() => {
         $("#two").css("background-color", darkcolors.darkred);
-    }, 1000);
+    }, 300);
 }
 
 const playYellowNote = () => {
@@ -252,7 +189,7 @@ const playYellowNote = () => {
     $('#audio3')[0].play();
     let timer = setTimeout(() => {
         $("#three").css("background-color", darkcolors.darkyellow);
-    }, 1000);
+    }, 300);
 }
 
 const playBlueNote = (count) => {
@@ -260,33 +197,14 @@ const playBlueNote = (count) => {
     $('#audio4')[0].play();
     let timer = setTimeout(() => {
         $("#four").css("background-color", darkcolors.darkblue);
-    }, 1000);
+    }, 300);
 }
 
-$(".mid").hide();
-$(".hard-lvl").hide();
 
 // /* Slider on Input */
 // slideInput.oninput = () => {
 //     rangeText.innerHTML = rangeValues[slideInput.value];
 
-//     if (slideInput.value === "1") {
-//         $(".mid").hide('slow');
-//         $(".hard-lvl").hide('slow');
-//         $(".content").show('slow');
-//         easymode();
-//     }
-
-//     if (slideInput.value === "2") {
-//         $(".content").hide('slow');
-//         $(".hard-lvl").hide('slow');
-//         $(".mid").show('slow');
-//     }
-//     if (slideInput.value === "3") {
-//         $(".content").hide('slow');
-//         $(".mid").hide('slow');
-//         $(".hard-lvl").show('slow');
-//     }
 // }
 
 
