@@ -47,7 +47,7 @@ startBtn.addEventListener('click', function () {
     if (startBtn.innerHTML === "Reset") {
         startBtn.innerHTML = "Start";
         countText.innerHTML = `Success: ${counter}/${totalTurns}`; //display UI turns
-        failText.innerHTML = `Fail: ${failCounter}/${totalTurns}`;
+        failText.innerHTML = `Fail: ${failCounter}`;
         rangeText.innerHTML = rangeValues[1];
         resetTurnValues();
 
@@ -63,7 +63,7 @@ for (var i = 0; i < totalTurns; i++) {
 console.log(totalTonesPerTurn);
 
 countText.innerHTML = `Success: ${counter}/${totalTurns}`; //display UI turns
-failText.innerHTML = `Fail: ${failCounter}/${totalTurns}`;
+failText.innerHTML = `Fail: ${failCounter}`;
 
 const startGame = () => {
 
