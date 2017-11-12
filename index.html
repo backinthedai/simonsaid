@@ -52,6 +52,7 @@
         grid-row: 1/2;
         background: rgb(0, 100, 0);
         border-radius: 15px 50px;
+        color: rgb(0, 100, 0);
     }
 
     #two {
@@ -59,6 +60,7 @@
         grid-row: 1/2;
         background: rgb(139, 0, 0);
         border-radius: 50px 15px;
+        color: rgb(139, 0, 0);
     }
 
     #three {
@@ -66,6 +68,7 @@
         grid-row: 2/3;
         background: rgb(184, 134, 11);
         border-radius: 50px 15px;
+        color: rgb(184, 134, 11);
     }
 
     #four {
@@ -73,6 +76,7 @@
         grid-row: 2/3;
         background: rgb(0, 0, 139);
         border-radius: 15px 50px;
+        color: rgb(0, 0, 139);
     }
 
     /** slider CSS */
@@ -87,7 +91,8 @@
     } */
 
     #slideInput {
-        margin-top: 20px;
+        
+        margin-top: 10px;
         width: 100px;
         color: white;
     }
@@ -129,13 +134,16 @@
         padding-left: 20px;
 
         font-family: 'Bungee';
-        font-size: 16px;
+        font-size: 15px;
         /* border-radius: 100px; */
         height: 50px;
         color: white;
 
     }
 
+    .mode{
+        font-family: 'Bungee';
+    }
     .footer {
         color: black;
         position: absolute;
@@ -174,6 +182,7 @@
             <button type="button" class="btn start-button" id="start-btn">Start</button>
         </div>
         <div class="slider">
+            <label class="mode">MODE</label>
             <input type="range" min="1" max="3" value="1" step="1" id="slideInput">
         </div>
 
