@@ -140,6 +140,7 @@ const human = (e) => {
     let id = e.target.id;
 
     num = +document.getElementById(id).innerHTML;
+    playTone(num);
     toMatch.push(num);
 
     console.log("toMatch:" + toMatch.length);
@@ -154,16 +155,14 @@ const human = (e) => {
         tobeMatch.length = 0;
         toMatch.length = 0;
         console.log("this is a match");
-        
+
         timeout = setTimeout(() => {
             startGame();
-        }, 1500);
-        
+        }, 1500);        
     }
 
+
 }
-
-
 
 //Get the value from totalTonesPerTurn array and use the value to get another randomize array to pick the colors
 const playTones = (idxValue) => {
@@ -206,6 +205,7 @@ const playTones = (idxValue) => {
     return tones;
 }
 
+//play each tone by the value of the tones idx
 const playTone = (num) => {
     if (num === 1) {
         playGreenNote();
@@ -220,6 +220,7 @@ const playTone = (num) => {
         playBlueNote();
     }
 }
+
 
 const getRandomTones = (num) => {
     let arr = [];
