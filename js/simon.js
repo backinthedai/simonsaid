@@ -15,7 +15,7 @@ const lightcolors = {
 
 var rangeValues =
     {
-        "1": "PLEASE DON'T HURT ME...",
+        "1": "DON'T HURT ME...",
         "2": "I'M READY FOR YOU!!",
         "3": "COME GET SOME!!!"
         // "4": "RESISTANCE IS FUTILE!!!"
