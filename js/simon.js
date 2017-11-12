@@ -62,8 +62,8 @@ for (var i = 0; i < totalTurns; i++) {
 }
 console.log(totalTonesPerTurn);
 
-countText.innerHTML = `Success: ${counter}/${totalTurns}`; //display UI turns
-failText.innerHTML = `Fail: ${failCounter}`;
+countText.innerHTML = `Success:  ${counter} / ${totalTurns}`; //display UI turns
+failText.innerHTML = `Fail:  ${failCounter}`;
 
 const startGame = () => {
 
@@ -87,7 +87,7 @@ const startGame = () => {
 //AI
 const ai = () => {
     let tonesArr = [];
-    countText.innerHTML = `Success: ${counter}/${totalTurns}`;
+    countText.innerHTML = `Success:  ${counter} / ${totalTurns}`;
 
     tonesArr = playTones(totalTonesPerTurn[counter]);
     return tonesArr;
@@ -115,7 +115,7 @@ const human = (e) => {
             counter--; //<-- If wrong minus counter
         }
 
-        failText.innerHTML = `Fail: ${failCounter += 1}/${totalTurns}`;
+        failText.innerHTML = `Fail:  ${failCounter += 1} / ${totalTurns}`;
 
         $('#audioWrong')[0].play();
         timeout = setTimeout(() => {
@@ -125,7 +125,7 @@ const human = (e) => {
     else if (tobeMatch.length === toMatch.length && isSame === true) {
         resetTurnValues();
         counter++;
-        countText.innerHTML = `Success: ${counter}/${totalTurns}`;
+        countText.innerHTML = `Success:  ${counter} / ${totalTurns}`;
 
         console.log("this is a match");
         timeout = setTimeout(() => {
@@ -227,33 +227,41 @@ const getRandomTones = (num) => {
 
 const playGreenNote = () => {
     $("#one").css("background-color", lightcolors.lightgreen);
+    $("#one").css("color", lightcolors.lightgreen);
     $('#audio1')[0].play();
     let timer = setTimeout(() => {
         $("#one").css("background-color", darkcolors.darkgreen);
+        $("#one").css("color", darkcolors.darkgreen);
     }, 300);
 }
 
 const playRedNote = () => {
     $("#two").css("background-color", lightcolors.lightred);
+    $("#two").css("color", lightcolors.lightred);
     $('#audio2')[0].play();
     let timer = setTimeout(() => {
         $("#two").css("background-color", darkcolors.darkred);
+        $("#two").css("color", darkcolors.darkred);
     }, 300);
 }
 
 const playYellowNote = () => {
     $("#three").css("background-color", lightcolors.lightyellow);
+    $("#three").css("color", lightcolors.lightyellow);
     $('#audio3')[0].play();
     let timer = setTimeout(() => {
         $("#three").css("background-color", darkcolors.darkyellow);
+        $("#three").css("color", darkcolors.darkyellow);
     }, 300);
 }
 
 const playBlueNote = (count) => {
     $("#four").css("background-color", lightcolors.lightblue);
+    $("#four").css("color", lightcolors.lightblue);
     $('#audio4')[0].play();
     let timer = setTimeout(() => {
         $("#four").css("background-color", darkcolors.darkblue);
+        $("#four").css("color", darkcolors.darkblue);
     }, 300);
 }
 
