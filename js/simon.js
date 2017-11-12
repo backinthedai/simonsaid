@@ -17,33 +17,59 @@ var rangeValues =
     {
         "1": "DON'T HURT ME...",
         "2": "I'M READY FOR YOU!!",
-        "3": "COME GET SOME!!!"
-        // "4": "RESISTANCE IS FUTILE!!!"
+        "3": "COME GET SOME!!!",
+        "4": "WELL DONE!!!"
     };
 
 /* Set title */
 let rangeText = document.getElementById("rangeText");
 rangeText.innerHTML = rangeValues[1]; /* Set default slider text Value */
 
-let countText = document.getElementById("countText");
+const countText = document.getElementById("countText");
+const failText = document.getElementById("failText");
 
 const startBtn = document.getElementById("start-btn");
-let playedArray = [];
-
-startBtn.addEventListener('click', function () {
-    startGame();
-});
 
 let counter = 0;
+let failCounter = 0;
 let totalTurns = 20;
 let totalTonesPerTurn = [];
-let timeout; // id for setTimeout
-let tobeMatch = []; //store the random set 
-let toMatch = [];
-let humanIdx = 0;
+let timeout, delay; // id for setTimeout
+let tobeMatch = []; //store ai random set 
+let toMatch = []; //store human clicks
+let humanIdx = 0; //idx for human clicks
+
+
+startBtn.addEventListener('click', function () {
+    console.log("startbutton:" + startBtn.innerHTML);
+    console.log("counter:" + counter);
+
+    if (startBtn.innerHTML === "Reset") {
+        startBtn.innerHTML = "Start";
+        countText.innerHTML = `Success: ${counter}/${totalTurns}`; //display UI turns
+        failText.innerHTML = `Fail: ${failCounter}/${totalTurns}`;
+        rangeText.innerHTML = rangeValues[1];
+        resetTurnValues();
+
+    } else {
+        startGame();
+    }
+});
+
+//prefill random value to each index. Each value will be the numbers of tones to play
+for (var i = 0; i < totalTurns; i++) {
+    totalTonesPerTurn.push(Math.floor(Math.random() * 4) + 1);   //get random number from 1 to 4 b/c four audios
+}
+console.log(totalTonesPerTurn);
+
+countText.innerHTML = `Success: ${counter}/${totalTurns}`; //display UI turns
+failText.innerHTML = `Fail: ${failCounter}/${totalTurns}`;
 
 const startGame = () => {
-    let delay = setTimeout(() => {
+
+    startBtn.innerHTML = "Reset";
+
+    delay = setTimeout(() => {
         tobeMatch = ai(); //<--AI is here
         console.log("tobeMatch Value:" + tobeMatch);
     }, 500);
@@ -58,19 +84,12 @@ const startGame = () => {
     }, 1000);
 }
 
-for (var i = 0; i < totalTurns; i++) {
-    totalTonesPerTurn.push(Math.floor(Math.random() * 4) + 1);   //get random number from 1 to 4 b/c four audios
-}
-
-console.log(totalTonesPerTurn);
-
 //AI
 const ai = () => {
     let tonesArr = [];
-    countText.innerHTML = counter; //display turns
+    countText.innerHTML = `Success: ${counter}/${totalTurns}`;
 
     tonesArr = playTones(totalTonesPerTurn[counter]);
-    counter++;
     return tonesArr;
 }
 
@@ -84,21 +103,20 @@ const human = (e) => {
 
     console.log("toMatch:" + toMatch.length);
 
-    // let isSame = (tobeMatch.length === toMatch.length) && tobeMatch.every(function(item, idx){
-    //     return item === toMatch[idx];
-    // });
-    let isSame;
-
-    isSame = (num === tobeMatch[humanIdx]);
+    let isSame = (num === tobeMatch[humanIdx]);
     humanIdx++;
-
 
     console.log("idx:" + humanIdx);
     console.log("is Same:" + isSame);
 
     if (isSame === false) {
         resetTurnValues();
-        counter--; //<-- If wrong minus counter
+        if (counter > 0) {
+            counter--; //<-- If wrong minus counter
+        }
+
+        failText.innerHTML = `Fail: ${failCounter += 1}/${totalTurns}`;
+
         $('#audioWrong')[0].play();
         timeout = setTimeout(() => {
             startGame();
@@ -106,6 +124,9 @@ const human = (e) => {
     }
     else if (tobeMatch.length === toMatch.length && isSame === true) {
         resetTurnValues();
+        counter++;
+        countText.innerHTML = `Success: ${counter}/${totalTurns}`;
+
         console.log("this is a match");
         timeout = setTimeout(() => {
             $('#audioCorrect')[0].play();
@@ -113,10 +134,24 @@ const human = (e) => {
 
         timeout = setTimeout(() => {
             startGame();
+        }, 2500);
+    }
+
+    if (counter === totalTurns) {        
+        resetTurnValues();
+        counter = 0;
+        failCounter = 0;  
+
+        clearTimeout(timeout);
+        clearTimeout(delay);
+
+        timeout = setTimeout(() => {
+            rangeText.innerHTML = rangeValues[4];            
         }, 2000);
     }
-    
 }
+
+
 
 const resetTurnValues = () => {
     tobeMatch.length = 0;
@@ -162,7 +197,6 @@ const playTones = (idxValue) => {
             playTone(tones[3]);
         }, 3000);
     }
-
     return tones;
 }
 
