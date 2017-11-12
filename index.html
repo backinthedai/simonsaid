@@ -81,15 +81,6 @@
 
     /** slider CSS */
 
-    /* .slider {
-        margin-top: 40px;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        padding: 1rem;
-    } */
-
     #slideInput {
 
         margin-top: 10px;
@@ -103,7 +94,7 @@
         text-align: center;
     }
 
-    .start-button, .mode-button {
+    .start-button, .mode-button, #total-notes {
         font-family: 'Bungee';
         font-size: 30px;
         border-radius: 100px;
@@ -112,6 +103,10 @@
         outline: none;
         color: white;
         background: #1f1e1e;
+    }
+
+    #total-notes{
+        font-size: 15px;
     }
 
     .start-button:hover, .mode-button:hover {
@@ -139,7 +134,6 @@
         /* border-radius: 100px; */
         height: 50px;
         color: white;
-
     }
 
     .mode {
@@ -185,12 +179,9 @@
         </div>
 
         <div>
-            <button type="button" class="btn mode-button" id="mode-btn">EASY</button>
+            <button type="button" class="btn mode-button" id="mode-btn">EASY</button><br>
+            <label id="total-notes"></label>
         </div>
-        <!-- <div class="slider">
-           
-            <input type="range" min="1" max="3" value="1" step="1" id="slideInput">
-        </div> -->
 
     </div>
 
