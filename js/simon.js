@@ -24,8 +24,9 @@ var rangeValues =
 let gameLevel = {
     "EASY": 4,
     "MID": 8,
-    "HARD": 16
+    "HARD": 11
 }
+
 
 /* Set title */
 let rangeText = document.getElementById("rangeText");
@@ -52,7 +53,7 @@ let humanIdx = 0; //idx for human clicks
 const setGameMode = (mode) => {
     totalTonesPerTurn.length = 0;
     for (var i = 0; i < totalTurns; i++) {
-        totalTonesPerTurn.push(Math.floor(Math.random() * mode) + 1);   //get random number from 1 to 4 b/c four audios
+        totalTonesPerTurn.push(Math.floor(Math.random() * (mode-(mode-mode+1) +1) + (mode-mode+1)));   //get random number from 1 to 4 b/c four audios
     }
     console.log(totalTonesPerTurn);
 }
@@ -88,6 +89,8 @@ startBtn.addEventListener('click', function () {
         rangeText.innerHTML = rangeValues[1];
         resetTurnValues();
         modeBtn.addEventListener("click", gameMode);
+        setGameMode(gameLevel.EASY);
+        modeBtn.innerHTML="EASY";
 
     } else {
         startGame();
@@ -266,7 +269,7 @@ const playTones = (idxValue) => {
         }, 4000);
         timeout = setTimeout(() => {
             playTone(tones[5]);
-        }, 5000);       
+        }, 5000);
     }
 
     if (idxValue === 7) {
@@ -288,8 +291,9 @@ const playTones = (idxValue) => {
         }, 5000);
         timeout = setTimeout(() => {
             playTone(tones[6]);
-        }, 6000);         
+        }, 6000);
     }
+
     if (idxValue === 8) {
         playTone(tones[0]);
         timeout = setTimeout(() => {
@@ -309,78 +313,172 @@ const playTones = (idxValue) => {
         }, 5000);
         timeout = setTimeout(() => {
             playTone(tones[6]);
-        }, 6000);  
+        }, 6000);
         timeout = setTimeout(() => {
             playTone(tones[7]);
-        }, 7000);       
+        }, 7000);
+    }
+
+    if (idxValue === 9) {
+        playTone(tones[0]);
+        timeout = setTimeout(() => {
+            playTone(tones[1]);
+        }, 1000);
+        timeout = setTimeout(() => {
+            playTone(tones[2]);
+        }, 2000);
+        timeout = setTimeout(() => {
+            playTone(tones[3]);
+        }, 3000);
+        timeout = setTimeout(() => {
+            playTone(tones[4]);
+        }, 4000);
+        timeout = setTimeout(() => {
+            playTone(tones[5]);
+        }, 5000);
+        timeout = setTimeout(() => {
+            playTone(tones[6]);
+        }, 6000);
+        timeout = setTimeout(() => {
+            playTone(tones[7]);
+        }, 7000);
+        timeout = setTimeout(() => {
+            playTone(tones[8]);
+        }, 8000);
+    }
+
+    if (idxValue === 10) {
+        playTone(tones[0]);
+        timeout = setTimeout(() => {
+            playTone(tones[1]);
+        }, 1000);
+        timeout = setTimeout(() => {
+            playTone(tones[2]);
+        }, 2000);
+        timeout = setTimeout(() => {
+            playTone(tones[3]);
+        }, 3000);
+        timeout = setTimeout(() => {
+            playTone(tones[4]);
+        }, 4000);
+        timeout = setTimeout(() => {
+            playTone(tones[5]);
+        }, 5000);
+        timeout = setTimeout(() => {
+            playTone(tones[6]);
+        }, 6000);
+        timeout = setTimeout(() => {
+            playTone(tones[7]);
+        }, 7000);
+        timeout = setTimeout(() => {
+            playTone(tones[8]);
+        }, 8000);
+        timeout = setTimeout(() => {
+            playTone(tones[9]);
+        }, 9000);
+    }
+
+    if (idxValue === 11) {
+        playTone(tones[0]);
+        timeout = setTimeout(() => {
+            playTone(tones[1]);
+        }, 1000);
+        timeout = setTimeout(() => {
+            playTone(tones[2]);
+        }, 2000);
+        timeout = setTimeout(() => {
+            playTone(tones[3]);
+        }, 3000);
+        timeout = setTimeout(() => {
+            playTone(tones[4]);
+        }, 4000);
+        timeout = setTimeout(() => {
+            playTone(tones[5]);
+        }, 5000);
+        timeout = setTimeout(() => {
+            playTone(tones[6]);
+        }, 6000);
+        timeout = setTimeout(() => {
+            playTone(tones[7]);
+        }, 7000);
+        timeout = setTimeout(() => {
+            playTone(tones[8]);
+        }, 8000);
+        timeout = setTimeout(() => {
+            playTone(tones[9]);
+        }, 9000);
+        timeout = setTimeout(() => {
+            playTone(tones[10]);
+        }, 10000);
     }
     return tones;
 }
 
-//play each tone by the value of the tones idx
-const playTone = (num) => {
-    if (num === 1) {
-        playGreenNote();
-    }
-    if (num === 2) {
-        playRedNote();
-    }
-    if (num === 3) {
-        playYellowNote();
-    }
-    if (num === 4) {
-        playBlueNote();
-    }
-}
 
-const getRandomTones = (num) => {
-    let arr = [];
-    for (var i = 0; i < num; i++) {
-        let rnd = (Math.floor(Math.random() * 4) + 1);
-        arr.push(rnd);
+    //play each tone by the value of the tones idx
+    const playTone = (num) => {
+        if (num === 1) {
+            playGreenNote();
+        }
+        if (num === 2) {
+            playRedNote();
+        }
+        if (num === 3) {
+            playYellowNote();
+        }
+        if (num === 4) {
+            playBlueNote();
+        }
     }
-    return arr;
-}
 
-const playGreenNote = () => {
-    $("#one").css("background-color", lightcolors.lightgreen);
-    $("#one").css("color", lightcolors.lightgreen);
-    $('#audio1')[0].play();
-    let timer = setTimeout(() => {
-        $("#one").css("background-color", darkcolors.darkgreen);
-        $("#one").css("color", darkcolors.darkgreen);
-    }, 300);
-}
+    const getRandomTones = (num) => {
+        let arr = [];
+        for (var i = 0; i < num; i++) {
+            let rnd = (Math.floor(Math.random() * 4) + 1);
+            arr.push(rnd);
+        }
+        return arr;
+    }
 
-const playRedNote = () => {
-    $("#two").css("background-color", lightcolors.lightred);
-    $("#two").css("color", lightcolors.lightred);
-    $('#audio2')[0].play();
-    let timer = setTimeout(() => {
-        $("#two").css("background-color", darkcolors.darkred);
-        $("#two").css("color", darkcolors.darkred);
-    }, 300);
-}
+    const playGreenNote = () => {
+        $("#one").css("background-color", lightcolors.lightgreen);
+        $("#one").css("color", lightcolors.lightgreen);
+        $('#audio1')[0].play();
+        let timer = setTimeout(() => {
+            $("#one").css("background-color", darkcolors.darkgreen);
+            $("#one").css("color", darkcolors.darkgreen);
+        }, 300);
+    }
 
-const playYellowNote = () => {
-    $("#three").css("background-color", lightcolors.lightyellow);
-    $("#three").css("color", lightcolors.lightyellow);
-    $('#audio3')[0].play();
-    let timer = setTimeout(() => {
-        $("#three").css("background-color", darkcolors.darkyellow);
-        $("#three").css("color", darkcolors.darkyellow);
-    }, 300);
-}
+    const playRedNote = () => {
+        $("#two").css("background-color", lightcolors.lightred);
+        $("#two").css("color", lightcolors.lightred);
+        $('#audio2')[0].play();
+        let timer = setTimeout(() => {
+            $("#two").css("background-color", darkcolors.darkred);
+            $("#two").css("color", darkcolors.darkred);
+        }, 300);
+    }
 
-const playBlueNote = (count) => {
-    $("#four").css("background-color", lightcolors.lightblue);
-    $("#four").css("color", lightcolors.lightblue);
-    $('#audio4')[0].play();
-    let timer = setTimeout(() => {
-        $("#four").css("background-color", darkcolors.darkblue);
-        $("#four").css("color", darkcolors.darkblue);
-    }, 300);
-}
+    const playYellowNote = () => {
+        $("#three").css("background-color", lightcolors.lightyellow);
+        $("#three").css("color", lightcolors.lightyellow);
+        $('#audio3')[0].play();
+        let timer = setTimeout(() => {
+            $("#three").css("background-color", darkcolors.darkyellow);
+            $("#three").css("color", darkcolors.darkyellow);
+        }, 300);
+    }
+
+    const playBlueNote = (count) => {
+        $("#four").css("background-color", lightcolors.lightblue);
+        $("#four").css("color", lightcolors.lightblue);
+        $('#audio4')[0].play();
+        let timer = setTimeout(() => {
+            $("#four").css("background-color", darkcolors.darkblue);
+            $("#four").css("color", darkcolors.darkblue);
+        }, 300);
+    }
 
 
 
