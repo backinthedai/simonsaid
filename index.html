@@ -91,7 +91,7 @@
     } */
 
     #slideInput {
-        
+
         margin-top: 10px;
         width: 100px;
         color: white;
@@ -103,7 +103,7 @@
         text-align: center;
     }
 
-    .start-button {
+    .start-button, .mode-button {
         font-family: 'Bungee';
         font-size: 30px;
         border-radius: 100px;
@@ -114,10 +114,9 @@
         background: #1f1e1e;
     }
 
-    .start-button:hover {
+    .start-button:hover, .mode-button:hover {
         color: lightgrey;
         /* background: #1f1e1e; */
-
     }
 
     .info {
@@ -143,9 +142,10 @@
 
     }
 
-    .mode{
+    .mode {
         font-family: 'Bungee';
     }
+
     .footer {
         color: black;
         position: absolute;
@@ -183,10 +183,14 @@
         <div>
             <button type="button" class="btn start-button" id="start-btn">Start</button>
         </div>
-        <div class="slider">
-            <label class="mode">MODE</label>
-            <input type="range" min="1" max="3" value="1" step="1" id="slideInput">
+
+        <div>
+            <button type="button" class="btn mode-button" id="mode-btn">EASY</button>
         </div>
+        <!-- <div class="slider">
+           
+            <input type="range" min="1" max="3" value="1" step="1" id="slideInput">
+        </div> -->
 
     </div>
 
