@@ -38,6 +38,7 @@ const failText = document.getElementById("failText");
 const startBtn = document.getElementById("start-btn");
 const btnParent = document.getElementById("btn-parent");
 const modeBtn = document.getElementById("mode-btn");
+const totalNotesLbl = document.getElementById("total-notes");
 
 let counter = 0;
 let failCounter = 0;
@@ -91,6 +92,7 @@ startBtn.addEventListener('click', function () {
         modeBtn.addEventListener("click", gameMode);
         setGameMode(gameLevel.EASY);
         modeBtn.innerHTML="EASY";
+        totalNotesLbl.innerHTML = "";
 
     } else {
         startGame();
@@ -106,6 +108,7 @@ const startGame = () => {
     delay = setTimeout(() => {
         tobeMatch = ai(); //<--AI is here
         console.log("tobeMatch Value:" + tobeMatch);
+        totalNotesLbl.innerHTML = `Notes: ${tobeMatch.length}`; //<-- display how many notes in array to be match
     }, 500);
 
     delay = setTimeout(() => {
@@ -157,7 +160,7 @@ const human = (e) => {
             startGame();
         }, 2000);
     }
-    else if (tobeMatch.length === toMatch.length && isSame === true) {
+    else if (tobeMatch.length === toMatch.length && isSame === true) { //<-- game finish
         resetTurnValues();
         counter++;
         countText.innerHTML = `Success:  ${counter} / ${totalTurns}`;
@@ -196,12 +199,14 @@ const resetTurnValues = () => {
     tobeMatch.length = 0;
     toMatch.length = 0;
     humanIdx = 0;
+    totalNotesLbl.innerHTML = "";
 }
 
 //Get the value from totalTonesPerTurn array and use the value to get another randomize array to pick the colors
 const playTones = (idxValue) => {
     tones = getRandomTones(idxValue);
     console.log("random set tones:" + tones);
+
 
     if (idxValue === 1) {
         playTone(tones[0]);
@@ -482,11 +487,6 @@ const playTones = (idxValue) => {
 
 
 
-// /* Slider on Input */
-// slideInput.oninput = () => {
-//     rangeText.innerHTML = rangeValues[slideInput.value];
-
-// }
 
 
 
