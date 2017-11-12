@@ -88,6 +88,7 @@ var rangeValues =
 let rangeText = document.getElementById("rangeText");
 rangeText.innerHTML = rangeValues[1]; /* Set default slider text Value */
 
+let countText = document.getElementById("countText");
 
 const startBtn = document.getElementById("start-btn");
 let playedArray = [];
@@ -96,48 +97,91 @@ startBtn.addEventListener('click', function () {
     startGame();
 });
 
-const startGame = () => {
-
-    let delay = setTimeout(() => {
-        let aiPlayed = ai();
-    }, 500);
-
-}
-
 let counter = 0;
 let totalTurns = 20;
 let totalTonesPerTurn = [];
 let timeout; // id for setTimeout
-let tonesObj = {};
+let tobeMatch = []; //store the random set 
+let toMatch =[];
+
+const startGame = () => {
+    let delay = setTimeout(() => {
+        tobeMatch = ai(); //<--AI is here
+        console.log("tobeMatch Value:" + tobeMatch);
+    }, 500);
+
+    delay = setTimeout(() => {
+        //Human conditions
+        console.log("tobeMatch Length:" + tobeMatch.length);
+        if (tobeMatch.length > 0) {
+            let btnParent = document.getElementById("btn-parent");
+            btnParent.addEventListener("click", human, false);
+        }
+    }, 1000);
+}
 
 for (var i = 0; i < totalTurns; i++) {
     totalTonesPerTurn.push(Math.floor(Math.random() * 4) + 1);   //get random number from 1 to 4 b/c four audios
 }
+
 console.log(totalTonesPerTurn);
 
+//AI
 const ai = () => {
-    playTones(totalTonesPerTurn[counter]);  
+    countText.innerHTML = counter;
+    let tonesArr = playTones(totalTonesPerTurn[counter]);
     counter++;
-    return true;
+    return tonesArr;
 }
 
-const playTones = (idxValue) => {
+//Human
+const human = (e) => {
+    console.log("inside human");
+    let id = e.target.id;
+
+    num = +document.getElementById(id).innerHTML;
+    toMatch.push(num);
+
+    console.log("toMatch:" + toMatch.length);
     
+    let isSame = (tobeMatch.length === toMatch.length) && tobeMatch.every(function(item, idx){
+        return item === toMatch[idx];
+    });
+
+    console.log("is Same:" + isSame);
+
+    if(tobeMatch.length === toMatch.length && isSame === true){
+        tobeMatch.length = 0;
+        toMatch.length = 0;
+        console.log("this is a match");
+        
+        timeout = setTimeout(() => {
+            startGame();
+        }, 1500);
+        
+    }
+
+}
+
+
+
+//Get the value from totalTonesPerTurn array and use the value to get another randomize array to pick the colors
+const playTones = (idxValue) => {
     tones = getRandomTones(idxValue);
     console.log(tones);
 
-    if(idxValue === 1){
-      playTone(tones[0]);
+    if (idxValue === 1) {
+        playTone(tones[0]);
     }
 
-    if(idxValue === 2){
+    if (idxValue === 2) {
         playTone(tones[0]);
         timeout = setTimeout(() => {
             playTone(tones[1]);
         }, 1000);
-    }   
+    }
 
-    if(idxValue === 3){
+    if (idxValue === 3) {
         playTone(tones[0]);
         timeout = setTimeout(() => {
             playTone(tones[1]);
@@ -145,9 +189,9 @@ const playTones = (idxValue) => {
         timeout = setTimeout(() => {
             playTone(tones[2]);
         }, 2000);
-    }  
+    }
 
-    if(idxValue === 4){
+    if (idxValue === 4) {
         playTone(tones[0]);
         timeout = setTimeout(() => {
             playTone(tones[1]);
@@ -158,29 +202,30 @@ const playTones = (idxValue) => {
         timeout = setTimeout(() => {
             playTone(tones[3]);
         }, 3000);
-    }    
+    }
+    return tones;
 }
 
-const playTone =(num)=>{
-    if (num === 1){
+const playTone = (num) => {
+    if (num === 1) {
         playGreenNote();
     }
-    if (num === 2){
+    if (num === 2) {
         playRedNote();
     }
-    if (num === 3){
+    if (num === 3) {
         playYellowNote();
     }
-    if (num === 4){
+    if (num === 4) {
         playBlueNote();
     }
 }
 
-const getRandomTones=(num)=>{
+const getRandomTones = (num) => {
     let arr = [];
-    for(var i = 0; i < num; i++){
-      let rnd = (Math.floor(Math.random() * 4) + 1);
-      arr.push(rnd);
+    for (var i = 0; i < num; i++) {
+        let rnd = (Math.floor(Math.random() * 4) + 1);
+        arr.push(rnd);
     }
     return arr;
 }
@@ -207,7 +252,6 @@ const playYellowNote = () => {
     let timer = setTimeout(() => {
         $("#three").css("background-color", darkcolors.darkyellow);
     }, 1000);
-
 }
 
 const playBlueNote = (count) => {
@@ -217,7 +261,6 @@ const playBlueNote = (count) => {
         $("#four").css("background-color", darkcolors.darkblue);
     }, 1000);
 }
-
 
 $(".mid").hide();
 $(".hard-lvl").hide();
