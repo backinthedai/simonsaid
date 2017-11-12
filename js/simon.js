@@ -21,6 +21,12 @@ var rangeValues =
         "4": "WELL DONE!!!"
     };
 
+let gameLevel = {
+    "EASY": 4,
+    "MID": 8,
+    "HARD": 16
+}
+
 /* Set title */
 let rangeText = document.getElementById("rangeText");
 rangeText.innerHTML = rangeValues[1]; /* Set default slider text Value */
@@ -30,6 +36,7 @@ const failText = document.getElementById("failText");
 
 const startBtn = document.getElementById("start-btn");
 const btnParent = document.getElementById("btn-parent");
+const modeBtn = document.getElementById("mode-btn");
 
 let counter = 0;
 let failCounter = 0;
@@ -40,9 +47,39 @@ let tobeMatch = []; //store ai random set
 let toMatch = []; //store human clicks
 let humanIdx = 0; //idx for human clicks
 
+//prefill random value to each index. Each value will be the numbers of tones to play
+
+const setGameMode = (mode) => {
+    totalTonesPerTurn.length = 0;
+    for (var i = 0; i < totalTurns; i++) {
+        totalTonesPerTurn.push(Math.floor(Math.random() * mode) + 1);   //get random number from 1 to 4 b/c four audios
+    }
+    console.log(totalTonesPerTurn);
+}
+
+const gameMode = () => {
+    if (modeBtn.innerHTML === "EASY") {
+        modeBtn.innerHTML = "MID";
+        rangeText.innerHTML = rangeValues[2];
+        setGameMode(gameLevel.MID);
+    }
+    else if (modeBtn.innerHTML === "MID") {
+        modeBtn.innerHTML = "HARD";
+        rangeText.innerHTML = rangeValues[3];
+        setGameMode(gameLevel.HARD);
+    }
+    else if (modeBtn.innerHTML === "HARD") {
+        modeBtn.innerHTML = "EASY";
+        rangeText.innerHTML = rangeValues[1];
+        setGameMode(gameLevel.EASY);
+    }
+}
+setGameMode(gameLevel.EASY); //<-- initialize game mode to Easy
+
 startBtn.addEventListener('click', function () {
     console.log("startbutton:" + startBtn.innerHTML);
     console.log("counter:" + counter);
+    modeBtn.removeEventListener("click", gameMode);
 
     if (startBtn.innerHTML === "Reset") {
         startBtn.innerHTML = "Start";
@@ -50,23 +87,17 @@ startBtn.addEventListener('click', function () {
         failText.innerHTML = `Fail: ${failCounter}`;
         rangeText.innerHTML = rangeValues[1];
         resetTurnValues();
+        modeBtn.addEventListener("click", gameMode);
 
     } else {
         startGame();
     }
 });
 
-//prefill random value to each index. Each value will be the numbers of tones to play
-for (var i = 0; i < totalTurns; i++) {
-    totalTonesPerTurn.push(Math.floor(Math.random() * 4) + 1);   //get random number from 1 to 4 b/c four audios
-}
-console.log(totalTonesPerTurn);
-
 countText.innerHTML = `Success:  ${counter} / ${totalTurns}`; //display UI turns
 failText.innerHTML = `Fail:  ${failCounter}`;
 
 const startGame = () => {
-
     startBtn.innerHTML = "Reset";
 
     delay = setTimeout(() => {
@@ -79,11 +110,12 @@ const startGame = () => {
         console.log("tobeMatch Length:" + tobeMatch.length);
 
         if (tobeMatch.length > 0) {
-            
-            btnParent.addEventListener("click", human,false);
+            btnParent.addEventListener("click", human, false);
         }
-    }, 1000);
+    }, 1500);
 }
+
+modeBtn.addEventListener("click", gameMode); //change mode of the game
 
 //AI
 const ai = () => {
@@ -138,25 +170,23 @@ const human = (e) => {
     }
 
     //at the end of 20 turns
-    if (counter === totalTurns) {  
-        resetGame();       
+    if (counter === totalTurns) {
+        resetGame();
 
         timeout = setTimeout(() => {
-            rangeText.innerHTML = rangeValues[4];            
-        }, 2000);       
+            rangeText.innerHTML = rangeValues[4];
+        }, 2000);
     }
 }
 
-const resetGame=()=>{
+const resetGame = () => {
     resetTurnValues();
     counter = 0;
-    failCounter = 0;  
+    failCounter = 0;
     btnParent.removeEventListener("click", human);
 
     clearTimeout(timeout);
     clearTimeout(delay);
-
-    
 }
 
 const resetTurnValues = () => {
@@ -202,6 +232,87 @@ const playTones = (idxValue) => {
         timeout = setTimeout(() => {
             playTone(tones[3]);
         }, 3000);
+    }
+
+    if (idxValue === 5) {
+        playTone(tones[0]);
+        timeout = setTimeout(() => {
+            playTone(tones[1]);
+        }, 1000);
+        timeout = setTimeout(() => {
+            playTone(tones[2]);
+        }, 2000);
+        timeout = setTimeout(() => {
+            playTone(tones[3]);
+        }, 3000);
+        timeout = setTimeout(() => {
+            playTone(tones[4]);
+        }, 4000);
+    }
+
+    if (idxValue === 6) {
+        playTone(tones[0]);
+        timeout = setTimeout(() => {
+            playTone(tones[1]);
+        }, 1000);
+        timeout = setTimeout(() => {
+            playTone(tones[2]);
+        }, 2000);
+        timeout = setTimeout(() => {
+            playTone(tones[3]);
+        }, 3000);
+        timeout = setTimeout(() => {
+            playTone(tones[4]);
+        }, 4000);
+        timeout = setTimeout(() => {
+            playTone(tones[5]);
+        }, 5000);       
+    }
+
+    if (idxValue === 7) {
+        playTone(tones[0]);
+        timeout = setTimeout(() => {
+            playTone(tones[1]);
+        }, 1000);
+        timeout = setTimeout(() => {
+            playTone(tones[2]);
+        }, 2000);
+        timeout = setTimeout(() => {
+            playTone(tones[3]);
+        }, 3000);
+        timeout = setTimeout(() => {
+            playTone(tones[4]);
+        }, 4000);
+        timeout = setTimeout(() => {
+            playTone(tones[5]);
+        }, 5000);
+        timeout = setTimeout(() => {
+            playTone(tones[6]);
+        }, 6000);         
+    }
+    if (idxValue === 8) {
+        playTone(tones[0]);
+        timeout = setTimeout(() => {
+            playTone(tones[1]);
+        }, 1000);
+        timeout = setTimeout(() => {
+            playTone(tones[2]);
+        }, 2000);
+        timeout = setTimeout(() => {
+            playTone(tones[3]);
+        }, 3000);
+        timeout = setTimeout(() => {
+            playTone(tones[4]);
+        }, 4000);
+        timeout = setTimeout(() => {
+            playTone(tones[5]);
+        }, 5000);
+        timeout = setTimeout(() => {
+            playTone(tones[6]);
+        }, 6000);  
+        timeout = setTimeout(() => {
+            playTone(tones[7]);
+        }, 7000);       
     }
     return tones;
 }
@@ -270,6 +381,7 @@ const playBlueNote = (count) => {
         $("#four").css("color", darkcolors.darkblue);
     }, 300);
 }
+
 
 
 // /* Slider on Input */
