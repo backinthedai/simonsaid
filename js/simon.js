@@ -39,7 +39,8 @@ let totalTurns = 20;
 let totalTonesPerTurn = [];
 let timeout; // id for setTimeout
 let tobeMatch = []; //store the random set 
-let toMatch =[];
+let toMatch = [];
+let humanIdx = 0;
 
 const startGame = () => {
     let delay = setTimeout(() => {
@@ -66,9 +67,9 @@ console.log(totalTonesPerTurn);
 //AI
 const ai = () => {
     let tonesArr = [];
-    countText.innerHTML = counter;
+    countText.innerHTML = counter; //display turns
 
-    tonesArr = playTones(totalTonesPerTurn[counter]);         
+    tonesArr = playTones(totalTonesPerTurn[counter]);
     counter++;
     return tonesArr;
 }
@@ -77,28 +78,50 @@ const ai = () => {
 const human = (e) => {
     console.log("inside human");
     let id = e.target.id;
-
     num = +document.getElementById(id).innerHTML;
     playTone(num);
     toMatch.push(num);
 
     console.log("toMatch:" + toMatch.length);
-    
-    let isSame = (tobeMatch.length === toMatch.length) && tobeMatch.every(function(item, idx){
-        return item === toMatch[idx];
-    });
 
+    // let isSame = (tobeMatch.length === toMatch.length) && tobeMatch.every(function(item, idx){
+    //     return item === toMatch[idx];
+    // });
+    let isSame;
+
+    isSame = (num === tobeMatch[humanIdx]);
+    humanIdx++;
+
+
+    console.log("idx:" + humanIdx);
     console.log("is Same:" + isSame);
 
-    if(tobeMatch.length === toMatch.length && isSame === true){
-        tobeMatch.length = 0;
-        toMatch.length = 0;
+    if (isSame === false) {
+        resetTurnValues();
+        counter--; //<-- If wrong minus counter
+        $('#audioWrong')[0].play();
+        timeout = setTimeout(() => {
+            startGame();
+        }, 2000);
+    }
+    else if (tobeMatch.length === toMatch.length && isSame === true) {
+        resetTurnValues();
         console.log("this is a match");
+        timeout = setTimeout(() => {
+            $('#audioCorrect')[0].play();
+        }, 500);
 
         timeout = setTimeout(() => {
             startGame();
-        }, 1500);        
+        }, 2000);
     }
+    
+}
+
+const resetTurnValues = () => {
+    tobeMatch.length = 0;
+    toMatch.length = 0;
+    humanIdx = 0;
 }
 
 //Get the value from totalTonesPerTurn array and use the value to get another randomize array to pick the colors
@@ -106,7 +129,7 @@ const playTones = (idxValue) => {
     tones = getRandomTones(idxValue);
     console.log("random set tones:" + tones);
 
-    if (idxValue === 1) {      
+    if (idxValue === 1) {
         playTone(tones[0]);
     }
 
