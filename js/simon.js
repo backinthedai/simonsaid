@@ -200,6 +200,7 @@ const resetGame = () => {
 }
 
 const resetTurnValues = () => {
+    tobeMatch.length = 0;
     toMatch.length = 0;
     humanIdx = 0;
     totalNotesLbl.innerHTML = "";
