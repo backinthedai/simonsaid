@@ -48,13 +48,14 @@ let timeout, delay; // id for setTimeout
 let tobeMatch = []; //store ai random set 
 let toMatch = []; //store human clicks
 let humanIdx = 0; //idx for human clicks
+let failed = false;
 
 //prefill random value to each index. Each value will be the numbers of tones to play
 
 const setGameMode = (mode) => {
     totalTonesPerTurn.length = 0;
     for (var i = 0; i < totalTurns; i++) {
-        totalTonesPerTurn.push(Math.floor(Math.random() * (mode-(mode-mode+1) +1) + (mode-mode+1)));   //get random number from 1 to 4 b/c four audios
+        totalTonesPerTurn.push(Math.floor(Math.random() * (mode - (mode - mode + 1) + 1) + (mode - mode + 1)));   //get random number from 1 to 4 b/c four audios
     }
     console.log(totalTonesPerTurn);
 }
@@ -85,13 +86,13 @@ startBtn.addEventListener('click', function () {
 
     if (startBtn.innerHTML === "Reset") {
         startBtn.innerHTML = "Start";
-        countText.innerHTML = `Success: ${counter=0}/${totalTurns}`; //display UI turns
+        countText.innerHTML = `Success: ${counter = 0}/${totalTurns}`; //display UI turns
         failText.innerHTML = `Fail: ${failCounter}`;
         rangeText.innerHTML = rangeValues[1];
         resetTurnValues();
         modeBtn.addEventListener("click", gameMode);
         setGameMode(gameLevel.EASY);
-        modeBtn.innerHTML="EASY";
+        modeBtn.innerHTML = "EASY";
         totalNotesLbl.innerHTML = "";
 
     } else {
@@ -106,7 +107,9 @@ const startGame = () => {
     startBtn.innerHTML = "Reset";
 
     delay = setTimeout(() => {
-        tobeMatch = ai(); //<--AI is here
+        //if failed keep keep the current tobeMatch to try again
+        (failed === true) ? failed = false: tobeMatch = ai(); //<--AI is here    
+
         console.log("tobeMatch Value:" + tobeMatch);
         totalNotesLbl.innerHTML = `Notes: ${tobeMatch.length}`; //<-- display how many notes in array to be match
     }, 500);
@@ -148,9 +151,10 @@ const human = (e) => {
     console.log("is Same:" + isSame);
 
     if (isSame === false) {
+        failed = true;
         resetTurnValues();
-        if (counter > 0) {
-            counter--; //<-- If wrong minus counter
+        if (counter === 0) {
+            counter = 0; //<-- If wrong minus counter
         }
 
         failText.innerHTML = `Fail:  ${failCounter += 1}`;
@@ -196,7 +200,6 @@ const resetGame = () => {
 }
 
 const resetTurnValues = () => {
-    tobeMatch.length = 0;
     toMatch.length = 0;
     humanIdx = 0;
     totalNotesLbl.innerHTML = "";
@@ -420,70 +423,70 @@ const playTones = (idxValue) => {
 }
 
 
-    //play each tone by the value of the tones idx
-    const playTone = (num) => {
-        if (num === 1) {
-            playGreenNote();
-        }
-        if (num === 2) {
-            playRedNote();
-        }
-        if (num === 3) {
-            playYellowNote();
-        }
-        if (num === 4) {
-            playBlueNote();
-        }
+//play each tone by the value of the tones idx
+const playTone = (num) => {
+    if (num === 1) {
+        playGreenNote();
     }
+    if (num === 2) {
+        playRedNote();
+    }
+    if (num === 3) {
+        playYellowNote();
+    }
+    if (num === 4) {
+        playBlueNote();
+    }
+}
 
-    const getRandomTones = (num) => {
-        let arr = [];
-        for (var i = 0; i < num; i++) {
-            let rnd = (Math.floor(Math.random() * 4) + 1);
-            arr.push(rnd);
-        }
-        return arr;
+const getRandomTones = (num) => {
+    let arr = [];
+    for (var i = 0; i < num; i++) {
+        let rnd = (Math.floor(Math.random() * 4) + 1);
+        arr.push(rnd);
     }
+    return arr;
+}
 
-    const playGreenNote = () => {
-        $("#one").css("background-color", lightcolors.lightgreen);
-        $("#one").css("color", lightcolors.lightgreen);
-        $('#audio1')[0].play();
-        let timer = setTimeout(() => {
-            $("#one").css("background-color", darkcolors.darkgreen);
-            $("#one").css("color", darkcolors.darkgreen);
-        }, 300);
-    }
+const playGreenNote = () => {
+    $("#one").css("background-color", lightcolors.lightgreen);
+    $("#one").css("color", lightcolors.lightgreen);
+    $('#audio1')[0].play();
+    let timer = setTimeout(() => {
+        $("#one").css("background-color", darkcolors.darkgreen);
+        $("#one").css("color", darkcolors.darkgreen);
+    }, 300);
+}
 
-    const playRedNote = () => {
-        $("#two").css("background-color", lightcolors.lightred);
-        $("#two").css("color", lightcolors.lightred);
-        $('#audio2')[0].play();
-        let timer = setTimeout(() => {
-            $("#two").css("background-color", darkcolors.darkred);
-            $("#two").css("color", darkcolors.darkred);
-        }, 300);
-    }
+const playRedNote = () => {
+    $("#two").css("background-color", lightcolors.lightred);
+    $("#two").css("color", lightcolors.lightred);
+    $('#audio2')[0].play();
+    let timer = setTimeout(() => {
+        $("#two").css("background-color", darkcolors.darkred);
+        $("#two").css("color", darkcolors.darkred);
+    }, 300);
+}
 
-    const playYellowNote = () => {
-        $("#three").css("background-color", lightcolors.lightyellow);
-        $("#three").css("color", lightcolors.lightyellow);
-        $('#audio3')[0].play();
-        let timer = setTimeout(() => {
-            $("#three").css("background-color", darkcolors.darkyellow);
-            $("#three").css("color", darkcolors.darkyellow);
-        }, 300);
-    }
+const playYellowNote = () => {
+    $("#three").css("background-color", lightcolors.lightyellow);
+    $("#three").css("color", lightcolors.lightyellow);
+    $('#audio3')[0].play();
+    let timer = setTimeout(() => {
+        $("#three").css("background-color", darkcolors.darkyellow);
+        $("#three").css("color", darkcolors.darkyellow);
+    }, 300);
+}
 
-    const playBlueNote = (count) => {
-        $("#four").css("background-color", lightcolors.lightblue);
-        $("#four").css("color", lightcolors.lightblue);
-        $('#audio4')[0].play();
-        let timer = setTimeout(() => {
-            $("#four").css("background-color", darkcolors.darkblue);
-            $("#four").css("color", darkcolors.darkblue);
-        }, 300);
-    }
+const playBlueNote = (count) => {
+    $("#four").css("background-color", lightcolors.lightblue);
+    $("#four").css("color", lightcolors.lightblue);
+    $('#audio4')[0].play();
+    let timer = setTimeout(() => {
+        $("#four").css("background-color", darkcolors.darkblue);
+        $("#four").css("color", darkcolors.darkblue);
+    }, 300);
+}
 
 
 
