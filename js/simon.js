@@ -57,7 +57,7 @@ const setGameMode = (mode) => {
     for (var i = 0; i < totalTurns; i++) {
         totalTonesPerTurn.push(Math.floor(Math.random() * (mode - (mode - mode + 1) + 1) + (mode - mode + 1)));   //get random number from 1 to 4 b/c four audios
     }
-    console.log(totalTonesPerTurn);
+    //console.log(totalTonesPerTurn);
 }
 
 const gameMode = () => {
@@ -80,8 +80,8 @@ const gameMode = () => {
 setGameMode(gameLevel.EASY); //<-- initialize game mode to Easy
 
 startBtn.addEventListener('click', function () {
-    console.log("startbutton:" + startBtn.innerHTML);
-    console.log("counter:" + counter);
+    //console.log("startbutton:" + startBtn.innerHTML);
+    //console.log("counter:" + counter);
     modeBtn.removeEventListener("click", gameMode);
 
     if (startBtn.innerHTML === "Reset") {
@@ -108,15 +108,15 @@ const startGame = () => {
 
     delay = setTimeout(() => {
         //if failed keep keep the current tobeMatch to try again
-        (failed === true) ? failed = false: tobeMatch = ai(); //<--AI is here    
-
-        console.log("tobeMatch Value:" + tobeMatch);
+        tobeMatch = ai(); //<--AI is here    
+ 
+        //console.log("tobeMatch Value:" + tobeMatch);
         totalNotesLbl.innerHTML = `Notes: ${tobeMatch.length}`; //<-- display how many notes in array to be match
     }, 500);
 
     delay = setTimeout(() => {
         //Human conditions
-        console.log("tobeMatch Length:" + tobeMatch.length);
+        //console.log("tobeMatch Length:" + tobeMatch.length);
 
         if (tobeMatch.length > 0) {
             btnParent.addEventListener("click", human, false);
@@ -136,19 +136,19 @@ const ai = () => {
 
 //Human
 const human = (e) => {
-    console.log("inside human");
+    //console.log("inside human");
     let id = e.target.id;
     num = +document.getElementById(id).innerHTML;
     playTone(num);
     toMatch.push(num);
 
-    console.log("toMatch:" + toMatch.length);
+    //console.log("toMatch:" + toMatch.length);
 
     let isSame = (num === tobeMatch[humanIdx]);
     humanIdx++;
 
-    console.log("idx:" + humanIdx);
-    console.log("is Same:" + isSame);
+    //console.log("idx:" + humanIdx);
+    //console.log("is Same:" + isSame);
 
     if (isSame === false) {
         failed = true;
@@ -169,7 +169,7 @@ const human = (e) => {
         counter++;
         countText.innerHTML = `Success:  ${counter} / ${totalTurns}`;
 
-        console.log("this is a match");
+        //console.log("this is a match");
         timeout = setTimeout(() => {
             $('#audioCorrect')[0].play();
         }, 500);
@@ -208,8 +208,7 @@ const resetTurnValues = () => {
 //Get the value from totalTonesPerTurn array and use the value to get another randomize array to pick the colors
 const playTones = (idxValue) => {
     tones = getRandomTones(idxValue);
-    console.log("random set tones:" + tones);
-
+    //console.log("random set tones:" + tones);
 
     if (idxValue === 1) {
         playTone(tones[0]);
