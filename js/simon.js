@@ -57,7 +57,7 @@ const setGameMode = (mode) => {
     for (var i = 0; i < totalTurns; i++) {
         totalTonesPerTurn.push(Math.floor(Math.random() * (mode - (mode - mode + 1) + 1) + (mode - mode + 1)));   //get random number from 1 to 4 b/c four audios
     }
-    //console.log(totalTonesPerTurn);
+    console.log(totalTonesPerTurn);
 }
 
 const gameMode = () => {
