@@ -109,7 +109,7 @@ const startGame = () => {
     delay = setTimeout(() => {
         //if failed keep keep the current tobeMatch to try again
         tobeMatch = ai(); //<--AI is here    
- 
+
         //console.log("tobeMatch Value:" + tobeMatch);
         totalNotesLbl.innerHTML = `Notes: ${tobeMatch.length}`; //<-- display how many notes in array to be match
     }, 500);
@@ -208,219 +208,242 @@ const resetTurnValues = () => {
 
 //Get the value from totalTonesPerTurn array and use the value to get another randomize array to pick the colors
 const playTones = (idxValue) => {
-    tones = getRandomTones(idxValue);
-    //console.log("random set tones:" + tones);
+    let copied = [];
 
-    if (idxValue === 1) {
-        playTone(tones[0]);
-    }
+    const tones = getRandomTones(idxValue);
+    copied = tones.slice(0);  
+    playRemainingTones(tones);
+    return copied;
+};
 
-    if (idxValue === 2) {
-        playTone(tones[0]);
-        timeout = setTimeout(() => {
-            playTone(tones[1]);
-        }, 1000);
-    }
+// Takes a list of tones and recursively play through them
+const playRemainingTones = (remainingTones) => {
+       
+    if(remainingTones.length === 0){ return };
+    // Remove the first element of the array and play it 
+    playTone(remainingTones.shift());
 
-    if (idxValue === 3) {
-        playTone(tones[0]);
-        timeout = setTimeout(() => {
-            playTone(tones[1]);
-        }, 1000);
-        timeout = setTimeout(() => {
-            playTone(tones[2]);
-        }, 2000);
-    }
+    // Wait 1 second then play the remaining tones that are left
+    setTimeout(() => {
+        playRemainingTones(remainingTones);
+    }, 1000);
+};
 
-    if (idxValue === 4) {
-        playTone(tones[0]);
-        timeout = setTimeout(() => {
-            playTone(tones[1]);
-        }, 1000);
-        timeout = setTimeout(() => {
-            playTone(tones[2]);
-        }, 2000);
-        timeout = setTimeout(() => {
-            playTone(tones[3]);
-        }, 3000);
-    }
 
-    if (idxValue === 5) {
-        playTone(tones[0]);
-        timeout = setTimeout(() => {
-            playTone(tones[1]);
-        }, 1000);
-        timeout = setTimeout(() => {
-            playTone(tones[2]);
-        }, 2000);
-        timeout = setTimeout(() => {
-            playTone(tones[3]);
-        }, 3000);
-        timeout = setTimeout(() => {
-            playTone(tones[4]);
-        }, 4000);
-    }
+// const playTones = (idxValue) => {
+//     tones = getRandomTones(idxValue);
+//     //console.log("random set tones:" + tones);
 
-    if (idxValue === 6) {
-        playTone(tones[0]);
-        timeout = setTimeout(() => {
-            playTone(tones[1]);
-        }, 1000);
-        timeout = setTimeout(() => {
-            playTone(tones[2]);
-        }, 2000);
-        timeout = setTimeout(() => {
-            playTone(tones[3]);
-        }, 3000);
-        timeout = setTimeout(() => {
-            playTone(tones[4]);
-        }, 4000);
-        timeout = setTimeout(() => {
-            playTone(tones[5]);
-        }, 5000);
-    }
+//     if (idxValue === 1) {
+//         playTone(tones[0]);
+//     }
 
-    if (idxValue === 7) {
-        playTone(tones[0]);
-        timeout = setTimeout(() => {
-            playTone(tones[1]);
-        }, 1000);
-        timeout = setTimeout(() => {
-            playTone(tones[2]);
-        }, 2000);
-        timeout = setTimeout(() => {
-            playTone(tones[3]);
-        }, 3000);
-        timeout = setTimeout(() => {
-            playTone(tones[4]);
-        }, 4000);
-        timeout = setTimeout(() => {
-            playTone(tones[5]);
-        }, 5000);
-        timeout = setTimeout(() => {
-            playTone(tones[6]);
-        }, 6000);
-    }
+//     if (idxValue === 2) {
+//         playTone(tones[0]);
+//         timeout = setTimeout(() => {
+//             playTone(tones[1]);
+//         }, 1000);
+//     }
 
-    if (idxValue === 8) {
-        playTone(tones[0]);
-        timeout = setTimeout(() => {
-            playTone(tones[1]);
-        }, 1000);
-        timeout = setTimeout(() => {
-            playTone(tones[2]);
-        }, 2000);
-        timeout = setTimeout(() => {
-            playTone(tones[3]);
-        }, 3000);
-        timeout = setTimeout(() => {
-            playTone(tones[4]);
-        }, 4000);
-        timeout = setTimeout(() => {
-            playTone(tones[5]);
-        }, 5000);
-        timeout = setTimeout(() => {
-            playTone(tones[6]);
-        }, 6000);
-        timeout = setTimeout(() => {
-            playTone(tones[7]);
-        }, 7000);
-    }
+//     if (idxValue === 3) {
+//         playTone(tones[0]);
+//         timeout = setTimeout(() => {
+//             playTone(tones[1]);
+//         }, 1000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[2]);
+//         }, 2000);
+//     }
 
-    if (idxValue === 9) {
-        playTone(tones[0]);
-        timeout = setTimeout(() => {
-            playTone(tones[1]);
-        }, 1000);
-        timeout = setTimeout(() => {
-            playTone(tones[2]);
-        }, 2000);
-        timeout = setTimeout(() => {
-            playTone(tones[3]);
-        }, 3000);
-        timeout = setTimeout(() => {
-            playTone(tones[4]);
-        }, 4000);
-        timeout = setTimeout(() => {
-            playTone(tones[5]);
-        }, 5000);
-        timeout = setTimeout(() => {
-            playTone(tones[6]);
-        }, 6000);
-        timeout = setTimeout(() => {
-            playTone(tones[7]);
-        }, 7000);
-        timeout = setTimeout(() => {
-            playTone(tones[8]);
-        }, 8000);
-    }
+//     if (idxValue === 4) {
+//         playTone(tones[0]);
+//         timeout = setTimeout(() => {
+//             playTone(tones[1]);
+//         }, 1000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[2]);
+//         }, 2000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[3]);
+//         }, 3000);
+//     }
 
-    if (idxValue === 10) {
-        playTone(tones[0]);
-        timeout = setTimeout(() => {
-            playTone(tones[1]);
-        }, 1000);
-        timeout = setTimeout(() => {
-            playTone(tones[2]);
-        }, 2000);
-        timeout = setTimeout(() => {
-            playTone(tones[3]);
-        }, 3000);
-        timeout = setTimeout(() => {
-            playTone(tones[4]);
-        }, 4000);
-        timeout = setTimeout(() => {
-            playTone(tones[5]);
-        }, 5000);
-        timeout = setTimeout(() => {
-            playTone(tones[6]);
-        }, 6000);
-        timeout = setTimeout(() => {
-            playTone(tones[7]);
-        }, 7000);
-        timeout = setTimeout(() => {
-            playTone(tones[8]);
-        }, 8000);
-        timeout = setTimeout(() => {
-            playTone(tones[9]);
-        }, 9000);
-    }
+//     if (idxValue === 5) {
+//         playTone(tones[0]);
+//         timeout = setTimeout(() => {
+//             playTone(tones[1]);
+//         }, 1000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[2]);
+//         }, 2000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[3]);
+//         }, 3000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[4]);
+//         }, 4000);
+//     }
 
-    if (idxValue === 11) {
-        playTone(tones[0]);
-        timeout = setTimeout(() => {
-            playTone(tones[1]);
-        }, 1000);
-        timeout = setTimeout(() => {
-            playTone(tones[2]);
-        }, 2000);
-        timeout = setTimeout(() => {
-            playTone(tones[3]);
-        }, 3000);
-        timeout = setTimeout(() => {
-            playTone(tones[4]);
-        }, 4000);
-        timeout = setTimeout(() => {
-            playTone(tones[5]);
-        }, 5000);
-        timeout = setTimeout(() => {
-            playTone(tones[6]);
-        }, 6000);
-        timeout = setTimeout(() => {
-            playTone(tones[7]);
-        }, 7000);
-        timeout = setTimeout(() => {
-            playTone(tones[8]);
-        }, 8000);
-        timeout = setTimeout(() => {
-            playTone(tones[9]);
-        }, 9000);
-        timeout = setTimeout(() => {
-            playTone(tones[10]);
-        }, 10000);
-    }
-    return tones;
-}
+//     if (idxValue === 6) {
+//         playTone(tones[0]);
+//         timeout = setTimeout(() => {
+//             playTone(tones[1]);
+//         }, 1000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[2]);
+//         }, 2000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[3]);
+//         }, 3000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[4]);
+//         }, 4000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[5]);
+//         }, 5000);
+//     }
+
+//     if (idxValue === 7) {
+//         playTone(tones[0]);
+//         timeout = setTimeout(() => {
+//             playTone(tones[1]);
+//         }, 1000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[2]);
+//         }, 2000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[3]);
+//         }, 3000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[4]);
+//         }, 4000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[5]);
+//         }, 5000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[6]);
+//         }, 6000);
+//     }
+
+//     if (idxValue === 8) {
+//         playTone(tones[0]);
+//         timeout = setTimeout(() => {
+//             playTone(tones[1]);
+//         }, 1000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[2]);
+//         }, 2000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[3]);
+//         }, 3000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[4]);
+//         }, 4000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[5]);
+//         }, 5000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[6]);
+//         }, 6000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[7]);
+//         }, 7000);
+//     }
+
+//     if (idxValue === 9) {
+//         playTone(tones[0]);
+//         timeout = setTimeout(() => {
+//             playTone(tones[1]);
+//         }, 1000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[2]);
+//         }, 2000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[3]);
+//         }, 3000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[4]);
+//         }, 4000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[5]);
+//         }, 5000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[6]);
+//         }, 6000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[7]);
+//         }, 7000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[8]);
+//         }, 8000);
+//     }
+
+//     if (idxValue === 10) {
+//         playTone(tones[0]);
+//         timeout = setTimeout(() => {
+//             playTone(tones[1]);
+//         }, 1000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[2]);
+//         }, 2000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[3]);
+//         }, 3000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[4]);
+//         }, 4000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[5]);
+//         }, 5000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[6]);
+//         }, 6000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[7]);
+//         }, 7000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[8]);
+//         }, 8000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[9]);
+//         }, 9000);
+//     }
+
+//     if (idxValue === 11) {
+//         playTone(tones[0]);
+//         timeout = setTimeout(() => {
+//             playTone(tones[1]);
+//         }, 1000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[2]);
+//         }, 2000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[3]);
+//         }, 3000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[4]);
+//         }, 4000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[5]);
+//         }, 5000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[6]);
+//         }, 6000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[7]);
+//         }, 7000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[8]);
+//         }, 8000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[9]);
+//         }, 9000);
+//         timeout = setTimeout(() => {
+//             playTone(tones[10]);
+//         }, 10000);
+//     }
+//     return tones;
+// }
 
 
 //play each tone by the value of the tones idx
