@@ -85,7 +85,7 @@ startBtn.addEventListener('click', function () {
 
     if (startBtn.innerHTML === "Reset") {
         startBtn.innerHTML = "Start";
-        countText.innerHTML = `Success: ${counter}/${totalTurns}`; //display UI turns
+        countText.innerHTML = `Success: ${counter=0}/${totalTurns}`; //display UI turns
         failText.innerHTML = `Fail: ${failCounter}`;
         rangeText.innerHTML = rangeValues[1];
         resetTurnValues();
